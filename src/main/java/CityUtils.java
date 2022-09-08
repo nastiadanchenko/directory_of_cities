@@ -1,9 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.text.MessageFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class CityUtils {
     final static String FILE_NAME = "src/main/resources/city_ru.csv";
@@ -66,9 +65,9 @@ public class CityUtils {
      *
      * @param cities список городов
      */
-
     public static void findMaxPopulationAndIndex(List<City> cities){
-        City[] cityArray  = cities.toArray(new City[0]);
+        City[] cityArray  = new City[cities.size()];
+        cities.toArray(cityArray);
         int temp = 0;
         int index = 0;
         for (int i = 0; i <cityArray.length ; i++) {
@@ -78,8 +77,20 @@ public class CityUtils {
             }
         }
 
-        System.out.printf("[%d] = %d", index,temp);
+        System.out.println(MessageFormat.format("[{0}] = {1}", index,temp));
 
+    }
+
+    /**
+     * Считает количество городов в разрезе регинов
+     *
+     * @param cities список городов
+     */
+
+    public static void counterCityOfRegion(List<City> cities){
+        Map<String, Long> districts = cities.stream().collect(Collectors.groupingBy(City::getRegion,Collectors.counting()));
+
+        districts.forEach((s, aLong) -> System.out.printf("%s - %d\n", s, aLong));
     }
 
     /**
