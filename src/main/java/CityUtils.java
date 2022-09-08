@@ -26,18 +26,19 @@ public class CityUtils {
     }
 
     /**
-     * Вывод в консоль списка городов
+     * Вывод в консоль массив городов
      *
-     * @param cities список городов
+     * @param cities массив городов
      */
     public static void print(List<City> cities) {
         cities.forEach(System.out::println);
     }
 
     /**
-     * Сортировка списка городов по наименованию города
+     * Сортировка массива городов по наименованию города в алфавитном порядке по убыванию
+     * без учета регистра
      *
-     * @param cities список городов
+     * @param cities массив городов
      * @return {@link City}
      */
     public static List<City> sortCityByName(List<City> cities) {
@@ -47,16 +48,16 @@ public class CityUtils {
     }
 
     /**
-     * Сортировка списка городов по наименованию округа и города
+     * Сортировка списка городов по федеральному округу и наименованию города внутри каждого федерального округа
+     * в алфавитном порядке по убыванию с учетом регистра
      *
      * @param cities список городов
      * @return {@link City}
      */
-    public static List<City> sortCityByRegionAndName(List<City> cities) {
+    public static List<City> sortCityByDistrictAndName(List<City> cities) {
         cities.sort(Comparator.comparing(City::getDistrict).thenComparing(City::getName));
         return cities;
     }
-
 
     /**
      * Разбор строки с данными о городе

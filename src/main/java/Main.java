@@ -9,7 +9,7 @@ public class Main {
 
         CityUtils.print(CityUtils.sortCityByName(cities));
 
-        CityUtils.print(CityUtils.sortCityByRegionAndName(cities));
+        CityUtils.print(CityUtils.sortCityByDistrictAndName(cities));
 
     }
 }
