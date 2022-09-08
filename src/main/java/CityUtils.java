@@ -26,19 +26,19 @@ public class CityUtils {
     }
 
     /**
-     * Вывод в консоль массив городов
+     * Вывод в консоль список городов
      *
-     * @param cities массив городов
+     * @param cities список городов
      */
     public static void print(List<City> cities) {
         cities.forEach(System.out::println);
     }
 
     /**
-     * Сортировка массива городов по наименованию города в алфавитном порядке по убыванию
+     * Сортировка списка городов по наименованию города в алфавитном порядке по убыванию
      * без учета регистра
      *
-     * @param cities массив городов
+     * @param cities список городов
      * @return {@link City}
      */
     public static List<City> sortCityByName(List<City> cities) {
@@ -57,6 +57,29 @@ public class CityUtils {
     public static List<City> sortCityByDistrictAndName(List<City> cities) {
         cities.sort(Comparator.comparing(City::getDistrict).thenComparing(City::getName));
         return cities;
+    }
+
+    /**
+     * Преобразование список городов в массив
+     * Поиск в массиве городов индекса элемента и значение
+     * с наибольшим количеством жителей города
+     *
+     * @param cities список городов
+     */
+
+    public static void findMaxPopulationAndIndex(List<City> cities){
+        City[] cityArray  = cities.toArray(new City[0]);
+        int temp = 0;
+        int index = 0;
+        for (int i = 0; i <cityArray.length ; i++) {
+            if (cityArray[i].getPopulation()> temp){
+                temp = cityArray[i].getPopulation();
+                index = i;
+            }
+        }
+
+        System.out.printf("[%d] = %d", index,temp);
+
     }
 
     /**
@@ -81,6 +104,9 @@ public class CityUtils {
 
         return new City(name, region, district, population, foundation);
     }
+
+
+
 
 
 }
