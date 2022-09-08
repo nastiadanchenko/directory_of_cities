@@ -1,10 +1,11 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-public class CityParse {
+public class CityUtils {
     final static String FILE_NAME = "src/main/resources/city_ru.csv";
 
     /**
@@ -34,6 +35,30 @@ public class CityParse {
     }
 
     /**
+     * Сортировка списка городов по наименованию города
+     *
+     * @param cities список городов
+     * @return {@link City}
+     */
+    public static List<City> sortCityByName(List<City> cities) {
+        Comparator<City> comparator = (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName());
+        cities.sort(comparator);
+        return cities;
+    }
+
+    /**
+     * Сортировка списка городов по наименованию округа и города
+     *
+     * @param cities список городов
+     * @return {@link City}
+     */
+    public static List<City> sortCityByRegionAndName(List<City> cities) {
+        cities.sort(Comparator.comparing(City::getDistrict).thenComparing(City::getName));
+        return cities;
+    }
+
+
+    /**
      * Разбор строки с данными о городе
      *
      * @param line строка с данными
@@ -55,4 +80,6 @@ public class CityParse {
 
         return new City(name, region, district, population, foundation);
     }
+
+
 }

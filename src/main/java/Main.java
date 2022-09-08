@@ -1,7 +1,15 @@
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
-        CityParse.print(CityParse.parse());
+        List<City> cities = CityUtils.parse();
+
+        CityUtils.print(cities);
+
+        CityUtils.print(CityUtils.sortCityByName(cities));
+
+        CityUtils.print(CityUtils.sortCityByRegionAndName(cities));
 
     }
 }
